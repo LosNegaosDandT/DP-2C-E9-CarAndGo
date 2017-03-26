@@ -1,0 +1,117 @@
+/* jmenu.css
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ * 
+ */
+
+.jMenu {
+	display: table;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* First level */
+
+.jMenu li {
+	display: table-cell;
+	background-color: #322f32;
+	margin: 0px;
+}
+
+.jMenu li a:hover {
+	background-color: #FFFFFF;	
+    box-shadow: inset 0px -5px 0px #A9D0F5;
+	color: #000;
+}
+
+.logout :hover {
+	background-color: blue;	
+    box-shadow: inset 0px -5px 0px Red;
+	color: #fff;
+}
+
+.jMenu li a {
+	padding: 10px;
+	display: block;
+	background-color: #3399FF;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight:bold;
+	text-decoration: none;
+}
+
+/* Lower levels */
+
+.jMenu li ul {
+	display: none;
+	position: absolute;
+	z-index: 9999;
+	padding: 0;
+	margin: 0;
+}
+
+.jMenu li ul li {
+	background-color: #322f32;
+	display: block;
+/* 	border-bottom: 1px solid #484548; */
+	padding: 0;
+}
+
+.jMenu li ul li.arrow {
+    margin-top: 10px;
+	background-color: #FFFFFF;
+	background-image: url('../images/arrow_down.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 6px;
+	padding: 0;
+	border-top: 1px solid brown;
+/* 	border-right: 1px solid brown; */
+/* 	border-left: 1px solid brown; */
+	padding-bottom: 10px
+}
+
+.jMenu li ul li a {
+	font-weight: normal;
+	font-size: 12px;
+	text-transform: none;
+	padding: 7px;
+	display: block;
+/* 	border-right: 1px solid brown; */
+/* 	border-left: 1px solid brown; */
+/* 	border-top: 1px solid transparent; */
+/* 	border-bottom: 1px solid transparent; */
+	text-decoration: none;
+}
+
+.jMenu li ul li a.isParent {
+	background-color: #3a3a3a;
+	background-image: url('../images/arrow_right.png');
+	background-repeat: no-repeat;
+	background-position: right center;
+	text-decoration: none;
+}
+
+.jMenu li ul li a:hover {
+/* 	font-weight:bold; */
+	background-color: lightblue;
+    box-shadow: inset 5px 0px 0px darkRed;
+	color: #000	;
+/* 	border-top: 1px solid #322f32; */
+/* 	border-bottom: 1px solid #322f32; */
+	text-decoration: none;
+}
+
+#logout {
+	background-color: IndianRed;
+	color:white;
+}
+#logout:hover {
+		
+}

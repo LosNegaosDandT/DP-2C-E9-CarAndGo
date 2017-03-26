@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="actor/request/list" extends="master.page">	
+		<put-attribute name="title" value="Listado de peticiones" />
+		<put-attribute name="body" value="/views/demand/listRequest.jsp" />
+	</definition>
+	
+	<definition name="actor/offer/list" extends="master.page">	
+		<put-attribute name="title" value="Listado de ofertas" />
+		<put-attribute name="body" value="/views/demand/listOffer.jsp" />
+	</definition>
+	
+	<definition name="customer/offer/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar ofertas" />
+		<put-attribute name="body" value="/views/demand/editOffer.jsp" />
+	</definition>
+	
+	<definition name="customer/request/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar peticiones" />
+		<put-attribute name="body" value="/views/demand/editRequest.jsp" />
+	</definition>
+	
+	<definition name="actor/offer/details" extends="master.page">	
+		<put-attribute name="title" value="Detalles de oferta" />
+		<put-attribute name="body" value="/views/demand/details.jsp" />
+	</definition>
+	
+	<definition name="actor/request/details" extends="master.page">	
+		<put-attribute name="title" value="Detalles de peticion" />
+		<put-attribute name="body" value="/views/demand/details.jsp" />
+	</definition>
+	
+</tiles-definitions>

@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="dd/MM/yyyy HH:mm" />
+	</bean>
+	
+	<!-- #UserAccount -->
+	<bean id="adminAccount" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerAccount1" class="security.UserAccount">
+		<property name="username" value="customer" />
+		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="customerAccount2" class="security.UserAccount">
+		<property name="username" value="customer2" />
+		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="customerAccount3" class="security.UserAccount">
+		<property name="username" value="customer3" />
+		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="superAccount" class="security.UserAccount">
+		<property name="username" value="super" />
+		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- #Banner -->
+	<bean id="banner1" class="domain.Banner">
+		<property name="image" value="http://i.imgur.com/DszDJyd.png" />
+	</bean>
+	
+	<!-- #Place -->
+	<bean id="place1" class="domain.Place">
+		<property name="address" value="Avenida de León XIII, Lora del Río (Sevilla)" />
+		<property name="latitude" value="37.653114" />
+		<property name="longitude" value="-5.53163040000004" />
+	</bean>
+	
+	<bean id="place2" class="domain.Place">
+		<property name="address" value="Calle Gran Vía, Madrid" />
+		<property name="latitude" value="40.420179" />
+		<property name="longitude" value="-3.7039276000000427" />
+	</bean>
+	
+	<bean id="place3" class="domain.Place">
+		<property name="address" value="Calle 4 de diciembre, Écija, Sevilla" />
+		<property name="latitude" value="37.5337645" />
+		<property name="longitude" value="-5.076042400000006" />
+	</bean>
+	
+	<bean id="place4" class="domain.Place">
+		<property name="address" value="Calle Lirio, Lora del Río, Sevilla" />
+		<property name="latitude" value="37.6610958" />
+		<property name="longitude" value="-5.519939399999998" />
+	</bean>
+	
+	<bean id="place5" class="domain.Place">
+		<property name="address" value="Av. de la Reina Mercedes, Sevilla" />
+		<property name="latitude" value="37.36054499999999" />
+		<property name="longitude" value="-5.986016999999947" />
+	</bean>
+	
+	<!-- #Comment -->
+	<bean id="comment1" class="domain.Comment">
+		<property name="title" value="Buen viaje!"/>	
+		<property name="text" value="Bon votage!"/>	
+		<property name="stars" value="4"/>	
+		<property name="moment" >
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1/2/2017 12:04" />
+			</bean>
+		</property>	
+		<property name="banned" value="false"/>
+	</bean>
+
+	<bean id="comment2" class="domain.Comment">
+		<property name="title" value="Deseando repetir"/>	
+		<property name="text" value="Mi churri y yo hemos echado un camino que nunca olvidaremos"/>	
+		<property name="stars" value="4"/>	
+		<property name="moment" >
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1/10/2015 18:23" />
+			</bean>
+		</property>	
+		<property name="banned" value="false"/>
+	</bean>
+
+	<bean id="comment3" class="domain.Comment">
+		<property name="title" value="Para habernos matado"/>	
+		<property name="text" value="El coche ha acabado panza arriba en una cuneta"/>	
+		<property name="stars" value="1"/>	
+		<property name="moment" >
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="15/12/2016 14:30" />
+			</bean>
+		</property>	
+		<property name="banned" value="false"/>
+	</bean>
+	
+	<bean id="comment4" class="domain.Comment">
+		<property name="title" value="Agridulce"/>	
+		<property name="text" value="Varios detalles me han estropeado la experiencia, 3/5"/>	
+		<property name="stars" value="3"/>	
+		<property name="moment" >
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1/1/2017 07:06" />
+			</bean>
+		</property>	
+		<property name="banned" value="false"/>
+	</bean>
+	
+	<bean id="comment5" class="domain.Comment">
+		<property name="title" value="Decepcionado"/>	
+		<property name="text" value="No me esperaba que fuera a salir tan mal"/>	
+		<property name="stars" value="1"/>	
+		<property name="moment" >
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="5/12/2016 12:04" />
+			</bean>
+		</property>	
+		<property name="banned" value="false"/>
+	</bean>
+	
+	
+	<!-- #Administrator -->
+	<bean id="admin" class="domain.Administrator">
+		<property name="userAccount" ref="adminAccount" />
+		<property name="name" value="Admin" />
+		<property name="surname" value="Admin admin" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phone" value="+045 674674674" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMessages">
+			<list>
+			</list>
+		</property>
+		<property name="sentMessages">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- #Customer -->
+	<bean id="customer1" class="domain.Customer">
+		<property name="userAccount" ref="customerAccount1" />
+		<property name="name" value="Paco" />
+		<property name="surname" value="Galego" />
+		<property name="email" value="pako@customer.com" />
+		<property name="phone" value="+045 674004674" />
+		<property name="comments">
+			<list>
+			<ref bean="comment1"/>
+			<ref bean="comment2"/>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMessages">
+			<list>
+			</list>
+		</property>
+		<property name="sentMessages">
+			<list>
+			</list>
+		</property>
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="customer2" class="domain.Customer">
+		<property name="userAccount" ref="customerAccount2" />
+		<property name="name" value="Federico" />
+		<property name="surname" value="García Lorca" />
+		<property name="email" value="eselorca@customer.com" />
+		<property name="phone" value="+045 774674674" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMessages">
+			<list>
+			</list>
+		</property>
+		<property name="sentMessages">
+			<list>
+			</list>
+		</property>
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="customer3" class="domain.Customer">
+		<property name="userAccount" ref="customerAccount3" />
+		<property name="name" value="Domingo" />
+		<property name="surname" value="Díaz Festivos" />
+		<property name="email" value="domin@customer.com" />
+		<property name="phone" value="+045 674674699" />
+		<property name="comments">
+			<list>
+			<ref bean="comment3"/>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMessages">
+			<list>
+			</list>
+		</property>
+		<property name="sentMessages">
+			<list>
+			</list>
+		</property>
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- #Offer -->
+	<bean id="offer1" class="domain.Offer">
+		<property name="title" value="Necesito acompañantes!" />
+		<property name="description" value="Buenas, voy a realizar un viaje y busco acompañantes! espero su mensaje, un saludo" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/02/2017 03:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place2" />
+		<property name="customer" ref="customer1" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			<ref bean="comment4"/>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="offer2" class="domain.Offer">
+		<property name="title" value="Viaje urgente!" />
+		<property name="description" value="Es urgente! envien su peticion cuanto antes!" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/02/2017 03:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place4" />
+		<property name="destination" ref="place5" />
+		<property name="customer" ref="customer3" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="offer3" class="domain.Offer">
+		<property name="title" value="¿Alguien se apunta?" />
+		<property name="description" value="Necesito saberlo antes de que empiece el Deluxe" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="15/07/1993 19:00" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer2" />
+		<property name="banned" value="true" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="offer4" class="domain.Offer">
+		<property name="title" value="1 Sitio libre" />
+		<property name="description" value="Tenemos 1 sitio libre para nuestro próximo viaje. ¿Quien se apunta?" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="13/02/2017 13:55" />
+			</bean>
+		</property>
+		<property name="origin" ref="place2" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer2" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="offer5" class="domain.Offer">
+		<property name="title" value="Super oferta!!" />
+		<property name="description" value="Dos huecos por el precio de uno" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1/03/2017 02:01" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer1" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="offer6" class="domain.Offer">
+		<property name="title" value="Viaje importante" />
+		<property name="description" value="Necesitamos saber la petición cuanto antes" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="15/02/2017 15:50" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place2" />
+		<property name="customer" ref="customer3" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="offer7" class="domain.Offer">
+		<property name="title" value="Importante" />
+		<property name="description" value="Necesitamos la respuesta cuanto antes" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="20/01/2017 18:57" />
+			</bean>
+		</property>
+		<property name="origin" ref="place2" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer3" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- #Request -->
+	<bean id="request1" class="domain.Request">
+		<property name="title" value="Busco transporte!" />
+		<property name="description" value="Me gustaría viajar y necesito medio de transporte! contacten conmigo." />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/02/2017 03:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place2" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer2" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="request2" class="domain.Request">
+		<property name="title" value="Viaje para fin de semana" />
+		<property name="description" value="Viajaré este fin de semana, para concretar hagan un comentario o realicen una peticion." />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/02/2017 03:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place4" />
+		<property name="destination" ref="place1" />
+		<property name="customer" ref="customer2" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="request3" class="domain.Request">
+		<property name="title" value="Fin de semana en El Rocío" />
+		<property name="description" value="Busco a alguien que en el próximo fin de semana se vaya a desplazar a El Rocío para compartir gastos." />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="18/07/2016 08:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place5" />
+		<property name="destination" ref="place2" />
+		<property name="customer" ref="customer1" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			<ref bean="comment5"/>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="request4" class="domain.Request">
+		<property name="title" value="Alrumbo" />
+		<property name="description" value="Busco a alguien que la próxima semana vaya a Cádiz." />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="04/07/2017 11:20" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place4" />
+		<property name="customer" ref="customer3" />
+		<property name="banned" value="true" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="request5" class="domain.Request">
+		<property name="title" value="Busco transporte!" />
+		<property name="description" value="Alguien con un hueco libre? Urgente" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="12/03/2017 12:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer2" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="request6" class="domain.Request">
+		<property name="title" value="Viaje familiar" />
+		<property name="description" value="Realizo un viaje familiar, hay un hueco libre" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="13/02/2017 13:61" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place2" />
+		<property name="customer" ref="customer1" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="request7" class="domain.Request">
+		<property name="title" value="Ofrezco 4 plazas" />
+		<property name="description" value="Cuatro plazas disponibles, contacten aqui" />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1/02/2017 00:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place2" />
+		<property name="destination" ref="place3" />
+		<property name="customer" ref="customer1" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="request8" class="domain.Request">
+		<property name="title" value="Viaje para el puente d" />
+		<property name="description" value="Viajaré este puente, para concretar hagan un comentario o realicen una peticion." />
+		<property name="moment">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="15/12/2016 11:31" />
+			</bean>
+		</property>
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place4" />
+		<property name="customer" ref="customer3" />
+		<property name="banned" value="false" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- #Application -->
+	<bean id="application1" class="domain.Application">
+		<property name="demand" ref="request1"/>
+		<property name="customer" ref="customer1" />
+		<property name="state" value="PENDING" />
+	</bean>
+	
+	<bean id="application2" class="domain.Application">
+		<property name="demand" ref="offer1"/>
+		<property name="customer" ref="customer3" />
+		<property name="state" value="DENIED" />
+	</bean>
+
+	<bean id="application3" class="domain.Application">
+		<property name="demand" ref="request3"/>
+		<property name="customer" ref="customer3" />
+		<property name="state" value="ACCEPTED" />
+	</bean>
+
+	<bean id="application4" class="domain.Application">
+		<property name="demand" ref="offer4"/>
+		<property name="customer" ref="customer1" />
+		<property name="state" value="DENIED" />
+	</bean>
+
+	<bean id="application5" class="domain.Application">
+		<property name="demand" ref="request5"/>
+		<property name="customer" ref="customer2" />
+		<property name="state" value="PENDING" />
+	</bean>
+	
+	<bean id="application6" class="domain.Application">
+		<property name="demand" ref="offer6"/>
+		<property name="customer" ref="customer3" />
+		<property name="state" value="PENDING" />
+	</bean>
+	
+	<bean id="application7" class="domain.Application">
+		<property name="demand" ref="request2"/>
+		<property name="customer" ref="customer3" />
+		<property name="state" value="ACCEPTED" />
+	</bean>
+	
+	<bean id="application8" class="domain.Application">
+		<property name="demand" ref="offer7"/>
+		<property name="customer" ref="customer3" />
+		<property name="state" value="DENIED" />
+	</bean>
+	
+	<!-- #Message (Duplicar mensajes y cambiar solo id, sent/received, s1/r1, s2/r2, ...)-->
+	<bean id="s1" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/1/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a Madrid" />
+		<property name="text" value="Perdona, podrías recogerme en la Calle Espuelas?" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer1"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="r1" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/1/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a Madrid" />
+		<property name="text" value="Perdona, podrías recogerme en la Calle Espuelas?" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer2"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="s2" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="13/3/2017 1:55" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje la Universidad Guatemalteca del Salvador" />
+		<property name="text" value="Perdona, podrías llevarme hasta la calle Gallina Vieja?" />
+		<property name="sender" ref="customer3" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer3"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="r2" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="13/3/2017 1:55" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje la Universidad Guatemalteca del Salvador" />
+		<property name="text" value="Perdona, podrías llevarme hasta la calle Gallina Vieja?" />
+		<property name="sender" ref="customer3" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer2"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="s3" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/1/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a fuenlabrada" />
+		<property name="text" value="Perdona, podrías recogerme en la plaza maximiliano primero?" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer1"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="r3" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="6/1/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a fuenlabrada" />
+		<property name="text" value="Perdona, podrías recogerme en la plaza maximiliano primero?" />
+		<property name="sender" ref="customer1" />
+		<property name="sent" value="true"/>
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer2"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="s4" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="18/1/2017 2:52" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje con amigos"/>
+		<property name="text" value="Perdona, podríamos llevarnos un CD de los chunguitos??" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="customer2" />
+		<property name="sent" value="true"/>
+		<property name="owner" ref="customer1"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="r4" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="18/1/2017 2:52" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje con amigos" />
+		<property name="text" value="Perdona, podríamos llevarnos un CD de los chunguitos??" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer2"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="s5" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="15/2/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a Sevilla" />
+		<property name="text" value="Perdona, podrías recogerme en la estación de trenes?" />
+		<property name="sender" ref="customer3" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer3"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="r5" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="15/2/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a Sevilla" />
+		<property name="text" value="Perdona, podrías recogerme en la estación de trenes?" />
+		<property name="sender" ref="customer3" />
+		<property name="recipient" ref="customer2" />
+		<property name="owner" ref="customer2"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="s6" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="9/1/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a Barcelona" />
+		<property name="text" value="Perdona, podrías recogerme en la estación de trenes?" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="customer3" />
+		<property name="owner" ref="customer3"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="r6" class="domain.Message">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="9/1/2017 2:51" />
+			</bean>
+		</property>
+		<property name="title" value="Viaje a Barcelona" />
+		<property name="text" value="Perdona, podrías recogerme en la estación de trenes?" />
+		<property name="sender" ref="customer3" />
+		<property name="recipient" ref="customer1" />
+		<property name="owner" ref="customer2"/>
+		<property name="sent" value="true"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- #Attachments (Duplicar como los mensajes as1/ar1, as2/ar2, ...)-->
+	<bean id="as1" class="domain.Attachment">
+		<property name="message" ref="r1" />
+		<property name="url" value="https://www.youtube.com/watch?v=7ifqzuPFpiE" />
+	</bean>
+	
+	<bean id="ar1" class="domain.Attachment">
+		<property name="message" ref="r1" />
+		<property name="url" value="https://www.youtube.com/watch?v=7ifqzuPFpiE" />
+	</bean>
+	
+	<bean id="as2" class="domain.Attachment">
+		<property name="message" ref="r2" />
+		<property name="url" value="https://www.youtube.com/watch?v=6ifqzuPFgiP" />
+	</bean>
+
+	<bean id="ar2" class="domain.Attachment">
+		<property name="message" ref="r2" />
+		<property name="url" value="https://www.youtube.com/watch?v=6ifqzuPFgiP" />
+	</bean>
+
+	<bean id="as3" class="domain.Attachment">
+		<property name="message" ref="r3" />
+		<property name="url" value="https://www.youtube.com/watch?v=6omozuPOgiF" />
+	</bean>
+
+	<bean id="ar3" class="domain.Attachment">
+		<property name="message" ref="r3" />
+		<property name="url" value="https://www.youtube.com/watch?v=6omozuPOgiF" />
+	</bean>
+	
+	<bean id="as4" class="domain.Attachment">
+		<property name="message" ref="r4" />
+		<property name="url" value="https://www.youtube.com/watch?v=6omozuPOgiF" />
+	</bean>
+
+	<bean id="ar4" class="domain.Attachment">
+		<property name="message" ref="r4" />
+		<property name="url" value="https://www.youtube.com/watch?v=6omozuPOgiF" />
+	</bean>
+	
+	<bean id="as5" class="domain.Attachment">
+		<property name="message" ref="r5" />
+		<property name="url" value="https://www.youtube.com/watch?v=xamyb_FYZBM" />
+	</bean>
+	
+	<bean id="ar5" class="domain.Attachment">
+		<property name="message" ref="r5" />
+		<property name="url" value="https://www.youtube.com/watch?v=xamyb_FYZBM" />
+	</bean>
+	
+	<bean id="as6" class="domain.Attachment">
+		<property name="message" ref="r6" />
+		<property name="url" value="https://www.youtube.com/watch?v=xamyb_FYZBM" />
+	</bean>
+	
+	<bean id="ar6" class="domain.Attachment">
+		<property name="message" ref="r6" />
+		<property name="url" value="https://www.youtube.com/watch?v=xamyb_FYZBM" />
+	</bean>
+</beans>
