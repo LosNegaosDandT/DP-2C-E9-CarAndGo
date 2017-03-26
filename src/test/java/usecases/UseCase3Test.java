@@ -24,6 +24,13 @@ import domain.Request;
 @Transactional
 public class UseCase3Test extends AbstractTest {
 
+	/*
+	 * An actor who is authenticated as a customer must be able to:
+	 * Post a request in which he or she informs that he or she
+	 * wishes to move from a place to another one and would like
+	 * to find someone with whom he or she can share the trip.
+	 */
+
 	// System under test ------------------------------------------------------
 	@Autowired
 	private RequestService	requestService;
@@ -35,26 +42,37 @@ public class UseCase3Test extends AbstractTest {
 	public void driver() {
 		final Object testingData[][] = {
 			{
+				//Un customer se loguea correctamente y publica una request correctamente.
 				"customer", "titulo", "esta es la descripcion", "Lora del rio", null, null, "Alcolea del rio", null, null, new Date(), null
 			}, {
+				//Un usuario sin loguear intenta publicar una request.
 				null, "titulo", "descipcion", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), IllegalArgumentException.class
 			}, {
+				//Un admin intenta publicar una request.
 				"admin", "titulo", "descipcion", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), IllegalArgumentException.class
 			}, {
+				//Un customer se loguea correctamente y publica una request correctamente.
 				"customer2", "titulo", "descipcion", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), null
 			}, {
+				//Un customer se loguea correctamente y publica una request correctamente.
 				"customer3", "titulo", "descipcion", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), null
 			}, {
+				//Un customer se loguea correctamente y publica una request sin descripcion.
 				"customer", "titulo", "", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), ConstraintViolationException.class
 			}, {
+				//Un customer se loguea correctamente y publica una request sin titulo.
 				"customer", "", "descipcion", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), ConstraintViolationException.class
 			}, {
+				//Un customer se loguea correctamente y publica una request sin titulo ni descripcion.
 				"customer", "", "", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), ConstraintViolationException.class
 			}, {
+				//Un customer se loguea correctamente y publica una request con la Address de origen vacía.
 				"customer", "titulo", "descipcion", "", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, new Date(), ConstraintViolationException.class
 			}, {
+				//Un customer se loguea correctamente y publica una request con la Address destino vacía.
 				"customer", "titulo", "descipcion", "Lora del rio", 22.2, 23.7, "", 34.5, 45.3, new Date(), ConstraintViolationException.class
 			}, {
+				//Un customer se loguea correctamente y publica una request sin fecha.
 				"customer", "titulo", "descipcion", "Lora del rio", 22.2, 23.7, "Alcolea del rio", 34.5, 45.3, null, ConstraintViolationException.class
 			}
 
