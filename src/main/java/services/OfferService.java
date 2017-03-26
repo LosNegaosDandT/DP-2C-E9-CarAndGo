@@ -59,7 +59,7 @@ public class OfferService {
 
 	public Offer save(final Offer offer) {
 		Assert.notNull(offer);
-		Assert.isTrue(this.loginService.getPrincipalActor().getId() == offer.getCustomer().getId());
+		//Assert.isTrue(this.loginService.getPrincipalActor().getId() == offer.getCustomer().getId());
 		return this.offerRepository.save(offer);
 	}
 

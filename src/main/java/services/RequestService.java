@@ -58,7 +58,7 @@ public class RequestService {
 
 	public Request save(final Request request) {
 		Assert.notNull(request);
-		Assert.isTrue(this.loginService.getPrincipalActor().getId() == request.getCustomer().getId());
+		//Assert.isTrue(this.loginService.getPrincipalActor().getId() == request.getCustomer().getId());
 		return this.requestRepository.save(request);
 	}
 
