@@ -48,7 +48,7 @@
 		value="<spring:message code="template.save" />" /> 
 	<input type="button" class="btn btn-warning" name="cancel"
 		value="<spring:message code="template.cancel" />"
-		onclick="document.location.href='profile/details.do?actorId=${commentForm.id}';" />
+		onclick="document.location.href='';" />
 	<br />
 
 </form:form>

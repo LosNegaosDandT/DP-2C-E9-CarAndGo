@@ -1,9 +1,6 @@
 
 package controllers.actor;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
+import services.AdministratorService;
+import services.CommentService;
+import services.CustomerService;
+import services.OfferService;
+import services.RequestService;
 import controllers.AbstractController;
-import domain.Actor;
+import domain.Administrator;
 import domain.Comment;
+import domain.Customer;
+import domain.Offer;
+import domain.Request;
+import forms.CommentForm;
 
 @Controller
 @RequestMapping("/actor/comment")
@@ -25,12 +30,16 @@ public class ActorCommentController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
-	//	@Autowired
-	//	private LoginService	loginService;
-	//	@Autowired
-	//	private CommentService	commentService;
 	@Autowired
-	private ActorService	actorService;
+	private CustomerService			customerService;
+	@Autowired
+	private AdministratorService	adminService;
+	@Autowired
+	private CommentService			commentService;
+	@Autowired
+	private RequestService			requestService;
+	@Autowired
+	private OfferService			offerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -39,52 +48,94 @@ public class ActorCommentController extends AbstractController {
 		super();
 	}
 
-	// Creation ---------------------------------------------------------------
+	// Commentar actor ---------------------------------------------------------------
 
-	@RequestMapping(value = "/actor")
+	@RequestMapping(value = "/actor", method = RequestMethod.GET)
 	public ModelAndView commentActor(@RequestParam final int actorId) {
-		ModelAndView result;
-		result = new ModelAndView("comment/actor");
-		//final List<Actor> aux = (List<Actor>) this.actorService.findAll();
-		//Assert.notNull(aux);
-		//Assert.notEmpty(aux);
-		final Comment comment = new Comment();
-		//			result.addObject("actor", r);
-		result.addObject("comment", comment);
-		return result;
-	}
-	@RequestMapping(value = "/actor", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveActor(@Valid final Comment comment, final BindingResult binding, final Integer actorId) {
-		ModelAndView result;
-		if (binding.hasErrors())
-			result = new ModelAndView("comment/actor");
-		else
-			try {
-				comment.setMoment(new Date());
-				final Actor owner = this.actorService.findOne(actorId);
-				final List<Comment> comments = (List<Comment>) owner.getComments();
-				comments.add(comment);
-				owner.setComments(comments);
-				this.actorService.save(owner);
-				result = new ModelAndView("redirect:../../actor/profile/details.do?actorId=" + actorId);
-			} catch (final Throwable oops) {
-				result = new ModelAndView("comment/actor");
-				result.addObject("message", "commit.error");
-			}
-		return result;
+		final ModelAndView res = new ModelAndView("comment/actor");
+		final CommentForm commentForm = new CommentForm();
+		commentForm.setId(actorId);
+		res.addObject("requestURI", "actor/comment/actor.do");
+		res.addObject("commentForm", commentForm);
+		return res;
 	}
 
-	//	@RequestMapping(value = "/request")
-	//	public ModelAndView commentRequest() {
-	//		ModelAndView result;
-	//		result = new ModelAndView("comment/request");
-	//		final List<Actor> aux = (List<Actor>) this.actorService.findAll();
-	//		Assert.notNull(aux);
-	//		Assert.notEmpty(aux);
-	//		final Comment comment = new Comment();
-	//		//			result.addObject("actor", r);
-	//		result.addObject("actors", aux);
-	//		result.addObject("comment", comment);
-	//		return result;
-	//	}
+	@RequestMapping(value = "/actor", method = RequestMethod.POST, params = "save")
+	public ModelAndView commentActor(@Valid final CommentForm commentForm, final BindingResult bindingResult) {
+
+		ModelAndView res = new ModelAndView("comment/actor");
+		Comment comment = this.commentService.create();
+		comment = this.commentService.reconstruct(commentForm, comment);
+
+		if (bindingResult.hasErrors()) {
+			System.out.println(bindingResult.getAllErrors());
+			res.addObject("requestURI", "actor/comment/actor.do");
+			res.addObject("commentForm", commentForm);
+		} else
+			try {
+				if (this.customerService.findOne(commentForm.getId()) != null) {
+					final Customer customer = this.customerService.findOne(commentForm.getId());
+					customer.getComments().add(comment);
+					this.customerService.save(customer);
+					this.commentService.save(comment);
+					res = new ModelAndView("redirect:/actor/profile/customer.do?actorId=" + commentForm.getId());
+				} else {
+					final Administrator admin = this.adminService.findOne(commentForm.getId());
+					admin.getComments().add(comment);
+					this.adminService.save(admin);
+					this.commentService.save(comment);
+					res = new ModelAndView("redirect:/actor/profile/admin.do?actorId=" + commentForm.getId());
+				}
+			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
+				res.addObject("message", "commit.error");
+			}
+		return res;
+	}
+
+	// Commentar demand ---------------------------------------------------------------
+
+	@RequestMapping(value = "/demand", method = RequestMethod.GET)
+	public ModelAndView commentDemand(@RequestParam final int demandId) {
+		final ModelAndView res = new ModelAndView("comment/demand");
+		final CommentForm commentForm = new CommentForm();
+		commentForm.setId(demandId);
+		res.addObject("requestURI", "actor/comment/demand.do");
+		res.addObject("commentForm", commentForm);
+		return res;
+	}
+
+	@RequestMapping(value = "/demand", method = RequestMethod.POST, params = "save")
+	public ModelAndView commentDemand(@Valid final CommentForm commentForm, final BindingResult bindingResult) {
+
+		ModelAndView res = new ModelAndView("comment/demand");
+		Comment comment = this.commentService.create();
+		comment = this.commentService.reconstruct(commentForm, comment);
+
+		if (bindingResult.hasErrors()) {
+			System.out.println(bindingResult.getAllErrors());
+			res.addObject("requestURI", "actor/comment/demand.do");
+			res.addObject("commentForm", commentForm);
+		} else
+			try {
+				if (this.requestService.findOne(commentForm.getId()) != null) {
+					final Request request = this.requestService.findOne(commentForm.getId());
+					request.getComments().add(comment);
+					this.requestService.save(request);
+					this.commentService.save(comment);
+					res = new ModelAndView("redirect:/actor/demand/details/request.do?demandId=" + commentForm.getId());
+				} else {
+					final Offer offer = this.offerService.findOne(commentForm.getId());
+					offer.getComments().add(comment);
+					this.offerService.save(offer);
+					this.commentService.save(comment);
+					res = new ModelAndView("redirect:/actor/demand/details/offer.do?demandId=" + commentForm.getId());
+				}
+			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
+				res.addObject("message", "commit.error");
+			}
+		return res;
+	}
+
 }

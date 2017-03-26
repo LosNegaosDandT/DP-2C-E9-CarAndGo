@@ -18,7 +18,12 @@
 
 	<definition name="comment/actor" extends="master.page">	
 		<put-attribute name="title" value="Comments" />
-		<put-attribute name="body" value="/views/comment/editActor.jsp" />
+		<put-attribute name="body" value="/views/comment/commentActor.jsp" />
+	</definition>
+	
+	<definition name="comment/demand" extends="master.page">	
+		<put-attribute name="title" value="Comments" />
+		<put-attribute name="body" value="/views/comment/commentDemand.jsp" />
 	</definition>
 	
 	

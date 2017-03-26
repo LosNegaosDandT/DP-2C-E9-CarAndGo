@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
 import domain.Comment;
+import forms.CommentForm;
 
 @Service
 @Transactional
@@ -65,4 +66,13 @@ public class CommentService {
 
 	// Other business methods -------------------------------------------------
 
+	public Comment reconstruct(final CommentForm commentForm, final Comment comment) {
+		comment.setBanned(false);
+		comment.setMoment(new Date());
+		comment.setStars(commentForm.getStars());
+		comment.setText(commentForm.getText());
+		comment.setTitle(commentForm.getTitle());
+
+		return comment;
+	}
 }

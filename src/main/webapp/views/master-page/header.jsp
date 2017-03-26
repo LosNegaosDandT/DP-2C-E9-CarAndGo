@@ -95,14 +95,7 @@
 					<li><a href="actor/request/list.do"><spring:message code="master.page.request.list" /></a></li>					
 				</ul>
 			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.comment" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="actor/comment/actor.do"><spring:message code="master.page.comment.actor" /></a></li>	
-					<li><a href="actor/comment/offer.do"><spring:message code="master.page.comment.offer" /></a></li>	
-					<li><a href="actor/comment/request.do"><spring:message code="master.page.comment.request" /></a></li>					
-				</ul>
-			</li>
+			
 			<li><a class="fNiv"><spring:message	code="master.page.admin.banner" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -132,14 +125,7 @@
 					<li><a href="actor/request/list.do"><spring:message code="master.page.request.list" /></a></li>					
 				</ul>
 			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.comment" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="actor/comment/actor.do"><spring:message code="master.page.comment.actor" /></a></li>	
-					<li><a href="actor/comment/offer.do"><spring:message code="master.page.comment.offer" /></a></li>	
-					<li><a href="actor/comment/request.do"><spring:message code="master.page.comment.request" /></a></li>					
-				</ul>
-			</li>
+			
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

@@ -37,7 +37,7 @@
 	
 	<input type="button" class="btn"
 		value="<spring:message code="actor.comment"/>"
-		onclick="document.location.href='------------------------------';" />
+		onclick="document.location.href='actor/comment/actor.do?actorId=${actor.id}';" />
 	<br />
 	
 <jstl:if test="${actor.comments.size()>0}">
