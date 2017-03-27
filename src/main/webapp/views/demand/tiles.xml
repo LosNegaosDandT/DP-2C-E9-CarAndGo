@@ -36,12 +36,12 @@
 		<put-attribute name="body" value="/views/demand/editRequest.jsp" />
 	</definition>
 	
-	<definition name="customer/offer/details" extends="master.page">	
+	<definition name="actor/offer/details" extends="master.page">	
 		<put-attribute name="title" value="Offer details" />
 		<put-attribute name="body" value="/views/demand/details.jsp" />
 	</definition>
 	
-	<definition name="customer/request/details" extends="master.page">	
+	<definition name="actor/request/details" extends="master.page">	
 		<put-attribute name="title" value="Request details" />
 		<put-attribute name="body" value="/views/demand/details.jsp" />
 	</definition>
